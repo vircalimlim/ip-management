@@ -46,4 +46,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function ip_records()
+    {
+        return $this->hasMany(IpRecord::class);
+    }
 }
