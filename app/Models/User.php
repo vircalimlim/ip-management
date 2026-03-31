@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(IpRecord::class);
     }
+
+    public function audit_logs()
+    {
+        return $this->hasMany(AuditLog::class);
+    }
 }

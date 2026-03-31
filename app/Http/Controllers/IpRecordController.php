@@ -28,7 +28,13 @@ class IpRecordController extends Controller
             'comment'       => 'nullable|string|max:500',
         ]);
 
-        $request->user()->ip_records()->create($data);
+        $ip_address = $request->user()->ip_records()->create($data);
+
+        $request->user()->audit_logs()->create([
+            'event_type'    => 'create_ip',
+            'ip_address_id' => $ip_address->id,
+            'description'   => 'IP= ' . $request->ip_address
+        ]);
 
         return redirect()->route('ip-record.index')->with('success', 'IP record added successfully.');
     }
@@ -44,16 +50,24 @@ class IpRecordController extends Controller
         ]);
 
         $record->update($data);
+        $request->user()->audit_logs()->create([
+            'event_type'    => 'update_label',
+            'ip_address_id' => $record->id
+        ]);
 
         return redirect()->route('ip-record.index')->with('success', 'IP record updated successfully.');
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $record = IpRecord::findOrFail($id);
         $this->authorize('delete', $record); 
 
         $record->delete();
+        $request->user()->audit_logs()->create([
+            'event_type'    => 'delete_ip',
+            'ip_address_id' => $record->id
+        ]);
 
         return redirect()->route('ip-record.index')->with('success', 'IP record deleted successfully.');
     }

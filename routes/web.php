@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuditLogController;
 use App\Http\Controllers\IpRecordController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\RoleMiddleware;
@@ -26,6 +27,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/ip-record',           [IpRecordController::class, 'store'])->name('ip-record.store');
     Route::put('/ip-record/{id}',       [IpRecordController::class, 'update'])->name('ip-record.update');
     Route::delete('/ip-record/{id}',    [IpRecordController::class, 'destroy'])->name('ip-record.destroy');
+});
+
+Route::middleware(['auth:sanctum', RoleMiddleware::class . ':superadmin'])->group(function () {
+    Route::get('/audit-log',            [AuditLogController::class, 'index'])->name('audit-log.index');
 });
 
 Route::middleware(['auth:sanctum', RoleMiddleware::class . ':superadmin'])->group(function () {

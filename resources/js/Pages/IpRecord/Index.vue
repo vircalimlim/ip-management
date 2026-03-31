@@ -47,7 +47,7 @@ const deleteIp = (id: number) => {
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="IP Record" />
 
     <AuthenticatedLayout>
         <div class="p-6 space-y-6">
