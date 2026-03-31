@@ -20,9 +20,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    // Route::get('/ip-record', function () {
-    //     return Inertia::render('IpRecord');
-    // })->middleware(['verified'])->name('ip-record');
+    Route::get('/dashboard',            [IpRecordController::class, 'index'])->name('dashboard');
     Route::get('/ip-record',            [IpRecordController::class, 'index'])->name('ip-record.index');
     Route::post('/ip-record',           [IpRecordController::class, 'store'])->name('ip-record.store');
     Route::put('/ip-record/{id}',       [IpRecordController::class, 'update'])->name('ip-record.update');
