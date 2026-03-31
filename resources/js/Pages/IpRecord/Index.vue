@@ -10,6 +10,10 @@ const { records } = defineProps({
     type: Object,
     required: true,
   },
+  user: {
+    type: Object,
+    required: true,
+  }
 });
 type DynamicObject = Record<string, any>;
 const showModal = ref(false)
@@ -70,7 +74,7 @@ const deleteIp = (id: number) => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="record in records" :key="record.id" class="border-t hover:bg-gray-50 transition">
+                        <tr v-if="records.length" v-for="record in records" :key="record.id" class="border-t hover:bg-gray-50 transition">
                             <td class="px-6 py-4">
                                 {{ record.ip_address }}
                             </td>
@@ -81,12 +85,17 @@ const deleteIp = (id: number) => {
                                 {{ record.comment }}
                             </td>
                             <td class="px-6 py-4 text-right">
-                                <button @click.prevent="openEditModal(record)" class="text-indigo-600 hover:underline mx-1">
+                                <button v-if="user.id === record.user_id || user.role === 'superadmin'" @click.prevent="openEditModal(record)" class="text-indigo-600 hover:underline mx-1">
                                     Edit
                                 </button>
-                                <button @click.prevent="deleteIp(record.id)" class="text-red-600 hover:underline mx-1">
+                                <button v-if="user.role === 'superadmin'" @click.prevent="deleteIp(record.id)" class="text-red-600 hover:underline mx-1">
                                     Delete
                                 </button>
+                            </td>
+                        </tr>
+                        <tr v-else>
+                            <td colspan="4" class="px-6 py-6 text-center text-gray-500">
+                                No records found.
                             </td>
                         </tr>
                     </tbody>

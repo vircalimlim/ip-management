@@ -21,9 +21,9 @@ const {showEdit, ip} = defineProps({
 const emit = defineEmits(['close']);
 
 const form = useForm({
-    ip_address: '',
+    // ip_address: '',
     label: '',
-    comment: ''
+    // comment: ''
 });
 
 const closeModal = () => {
@@ -33,18 +33,18 @@ const closeModal = () => {
 };
 
 const editForm = () => {
-  form.ip_address = ip.ip_address || '';
+  // form.ip_address = ip.ip_address || '';
   form.label = ip.label || '';
-  form.comment = ip.comment || '';
+  // form.comment = ip.comment || '';
 };
 
 const updateIp = () => {
   form.put(route("ip-record.update", ip.id), {
     onSuccess: () => {
       emit('close');
-      form.ip_address = '';
+      // form.ip_address = '';
       form.label = '';
-      form.comment = '';
+      // form.comment = '';
     },
   });
 };
@@ -61,7 +61,7 @@ watchEffect(() => {
     <h1 class="text-gray-700 text-2xl font-bold">Edit IP Address</h1>
     <form @submit.prevent="updateIp" class="mt-6 space-y-4">
 
-      <div>
+      <!-- <div>
         <InputLabel for="ip_address" value="IP Address" />
         <TextInput
           id="ip_address"
@@ -70,7 +70,7 @@ watchEffect(() => {
           v-model="form.ip_address"
         />
         <InputError class="mt-2" :message="form.errors.ip_address" />
-      </div>
+      </div> -->
 
       <div>
         <InputLabel for="label" value="Label" />
@@ -83,7 +83,7 @@ watchEffect(() => {
         <InputError class="mt-2" :message="form.errors.label" />
       </div>
 
-      <div>
+      <!-- <div>
         <InputLabel for="comment" value="Comment" />
         <textarea
             v-model="form.comment"
@@ -92,7 +92,7 @@ watchEffect(() => {
             class="w-full rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
         ></textarea>
         <InputError class="mt-2" :message="form.errors.comment" />
-      </div>
+      </div> -->
       
       <div class="flex items-center gap-4">
         <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
