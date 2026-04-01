@@ -6,6 +6,8 @@ import TextInput from '@/Components/TextInput.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import InputError from '@/Components/InputError.vue';
 import { useForm } from '@inertiajs/vue3';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 const {showModal} = defineProps({
   showModal: {
@@ -37,6 +39,10 @@ const submitIp = () => {
       form.ip_address = "";
       form.label = "";
       form.comment = "";
+
+      toast.success("Saved!", {
+        autoClose: 1000,
+      });
     },
     onError: (e) => {
       errors.value = e;

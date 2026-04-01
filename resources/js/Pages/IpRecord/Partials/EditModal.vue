@@ -6,6 +6,8 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import InputError from '@/Components/InputError.vue';
 import { useForm, usePage } from '@inertiajs/vue3';
 import { watchEffect } from 'vue';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 const {showEdit, ip} = defineProps({
   showEdit: {
@@ -45,6 +47,10 @@ const updateIp = () => {
       // form.ip_address = '';
       form.label = '';
       // form.comment = '';
+
+      toast.success("Updated!", {
+        autoClose: 1000,
+      });
     },
   });
 };
