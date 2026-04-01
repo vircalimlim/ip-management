@@ -35,20 +35,25 @@ cp .env.example .env
 ```bash
 docker-compose up -d --build
 ```
+4. Composer install:
 
-4. Generate app key:
+```bash
+docker-compose exec app composer install
+```
+
+5. Generate app key:
 
 ```bash
 docker-compose exec app php artisan key:generate
 ```
 
-5. Run migrations:
+6. Run migrations:
 
 ```bash
 docker-compose exec app php artisan migrate --seed
 ```
 
-6. Open on browser:
+7. Open on browser:
 
 ```bash
 http://localhost:8000
