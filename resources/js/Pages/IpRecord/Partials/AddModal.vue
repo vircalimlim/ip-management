@@ -24,6 +24,7 @@ const form = useForm({
     comment: ''
 });
 const errors = ref<Record<string, string>>({});
+const isLoading = ref(false);
 
 const closeModal = () => {
   emit('close');
@@ -33,12 +34,14 @@ const closeModal = () => {
 };
 
 const submitIp = () => {
+  isLoading.value = true;
   form.post(route("ip-record.store"), {
     onSuccess: () => {
       emit('close');
       form.ip_address = "";
       form.label = "";
       form.comment = "";
+      isLoading.value = false;
 
       toast.success("Saved!", {
         autoClose: 1000,
@@ -46,6 +49,7 @@ const submitIp = () => {
     },
     onError: (e) => {
       errors.value = e;
+      isLoading.value = false;
       console.log(e);
     },
   });
@@ -91,7 +95,7 @@ const submitIp = () => {
       </div>
 
       <div class="flex items-center gap-4">
-        <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+        <PrimaryButton :disabled="form.processing || isLoading">Save</PrimaryButton>
         <Transition
           enter-active-class="transition ease-in-out"
           enter-from-class="opacity-0"

@@ -5,7 +5,7 @@ import TextInput from '@/Components/TextInput.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import InputError from '@/Components/InputError.vue';
 import { useForm, usePage } from '@inertiajs/vue3';
-import { watchEffect } from 'vue';
+import { ref, watchEffect } from 'vue';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
@@ -19,6 +19,7 @@ const {showEdit, ip} = defineProps({
     required: true
   }
 });
+const isLoading = ref(false);
 
 const emit = defineEmits(['close']);
 
@@ -41,16 +42,22 @@ const editForm = () => {
 };
 
 const updateIp = () => {
+  isLoading.value = true;
   form.put(route("ip-record.update", ip.id), {
     onSuccess: () => {
       emit('close');
       // form.ip_address = '';
       form.label = '';
       // form.comment = '';
+      isLoading.value = false;
 
       toast.success("Updated!", {
         autoClose: 1000,
       });
+    },
+     onError: (e) => {
+      isLoading.value = false;
+      console.log(e);
     },
   });
 };
