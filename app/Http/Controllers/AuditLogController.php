@@ -10,7 +10,7 @@ class AuditLogController extends Controller
 {
     public function index()
     {
-        $logs = AuditLog::orderBy('id', 'desc')->get();
+        $logs = AuditLog::orderBy('id', 'desc')->paginate(10);
         return Inertia::render('AuditLog/Index', [
             'logs' => $logs
         ]);

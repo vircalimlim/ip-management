@@ -13,7 +13,7 @@ class IpRecordController extends Controller
 
     public function index()
     {
-        $records = IpRecord::orderBy('id', 'desc')->get();
+        $records = IpRecord::orderBy('id', 'desc')->paginate(10);
         return Inertia::render('IpRecord/Index', [
             'records' => $records,
             'user' => auth()->user()

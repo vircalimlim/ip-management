@@ -74,7 +74,7 @@ const deleteIp = (id: number) => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-if="records.length" v-for="record in records" :key="record.id" class="border-t hover:bg-gray-50 transition">
+                        <tr v-if="records.data.length" v-for="record in records.data" :key="record.id" class="border-t hover:bg-gray-50 transition">
                             <td class="px-6 py-4">
                                 {{ record.ip_address }}
                             </td>
@@ -99,7 +99,24 @@ const deleteIp = (id: number) => {
                             </td>
                         </tr>
                     </tbody>
-                </table>
+                </table>                
+
+                <div class="flex justify-center py-2 space-x-2">
+                    <button 
+                        :disabled="!records.prev_page_url" 
+                        @click.prevent="$inertia.get(records.prev_page_url)"
+                        href="#" class="text-body bg-neutral-secondary-medium border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading text-blue-700 hover:text-blue-500 shadow-xs font-medium leading-5 rounded-base text-sm px-3 py-2 focus:outline-none">
+                        Previous
+                    </button>
+
+                    <button 
+                        :disabled="!records.next_page_url" 
+                        @click.prevent="$inertia.get(records.next_page_url)"
+                        href="#" class="text-body bg-neutral-secondary-medium border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading text-blue-700 hover:text-blue-500 shadow-xs font-medium leading-5 rounded-base text-sm px-3 py-2 focus:outline-none">
+                        Next
+                    </button>
+                </div>
+
             </div>
         </div>
 
