@@ -101,7 +101,7 @@ const deleteIp = (id: number) => {
                     </tbody>
                 </table>                
 
-                <div class="flex justify-center py-2 space-x-2">
+                <div v-if="records.data.length" class="flex justify-center py-2 space-x-2">
                     <button 
                         :disabled="!records.prev_page_url" 
                         @click.prevent="$inertia.get(records.prev_page_url)"

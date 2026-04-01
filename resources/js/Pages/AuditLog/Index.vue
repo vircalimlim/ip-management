@@ -55,7 +55,7 @@ const { logs } = defineProps({
                         </tr>
                     </tbody>
                 </table>
-                <div class="flex justify-center py-2 space-x-2">
+                <div v-if="logs.data.length" class="flex justify-center py-2 space-x-2">
                     <button 
                         :disabled="!logs.prev_page_url" 
                         @click.prevent="$inertia.get(logs.prev_page_url)"
