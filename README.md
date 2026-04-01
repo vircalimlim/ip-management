@@ -55,15 +55,3 @@ http://localhost:8000
 ```
 
 ---
-
-## Frontend (Vue + Vite)
-
-The frontend runs inside a Node container.
-
-To start it:
-
-```bash
-npm install
-npm run dev
-```
----
