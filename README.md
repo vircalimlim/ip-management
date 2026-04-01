@@ -36,25 +36,19 @@ cp .env.example .env
 docker-compose up -d --build
 ```
 
-4. Install Laravel dependencies:
-
-```bash
-docker-compose exec app composer install
-```
-
-5. Generate app key:
+4. Generate app key:
 
 ```bash
 docker-compose exec app php artisan key:generate
 ```
 
-6. Run migrations:
+5. Run migrations:
 
 ```bash
-docker-compose exec app php artisan migrate
+docker-compose exec app php artisan migrate --seed
 ```
 
-7. Open on browser:
+6. Open on browser:
 
 ```bash
 http://localhost:8000
@@ -69,14 +63,7 @@ The frontend runs inside a Node container.
 To start it:
 
 ```bash
-docker-compose up node
+npm install
+npm run dev
 ```
-
-If needed, you can also run:
-
-```bash
-docker-compose exec node npm install
-docker-compose exec node npm run dev
-```
-
 ---
