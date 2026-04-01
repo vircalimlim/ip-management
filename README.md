@@ -59,4 +59,14 @@ docker-compose exec app php artisan migrate --seed
 http://localhost:8000
 ```
 
+## Sample Users
+
+### Superadmin
+- **Email:** supermeow@gmail.com, supermeow2@gmail.com
+- **Password:** pass@dev
+
+### Regular User
+- **Email:** adminmeow@gmail.com, adminmeow2@gmail.com, adminmeow3@gmail.com
+- **Password:** pass@dev
+
 ---
