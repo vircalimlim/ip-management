@@ -4,6 +4,8 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
 import { Head, useForm } from '@inertiajs/vue3'
 import AddModal from './Partials/AddModal.vue';
 import EditModal from './Partials/EditModal.vue';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 const { records } = defineProps({
   records: {
@@ -40,6 +42,9 @@ const deleteIp = (id: number) => {
       preserveState: true,
       preserveScroll: true,
       onSuccess: () => {
+        toast.success("Deleted!", {
+            autoClose: 1000,
+        });
       },
     });
   }
