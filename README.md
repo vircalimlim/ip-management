@@ -53,7 +53,7 @@ docker-compose exec app php artisan key:generate
 docker-compose exec app php artisan migrate --seed
 ```
 
-7. Run migrations:
+7. Run node:
 
 ```bash
 docker-compose up node
