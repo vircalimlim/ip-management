@@ -53,7 +53,13 @@ docker-compose exec app php artisan key:generate
 docker-compose exec app php artisan migrate --seed
 ```
 
-7. Open on browser:
+7. Run migrations:
+
+```bash
+docker-compose up node
+```
+
+8. Open on browser:
 
 ```bash
 http://localhost:8000
