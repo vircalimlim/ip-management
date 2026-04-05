@@ -49,6 +49,8 @@ class IpRecordController extends Controller
             // 'comment'       => 'nullable|string|max:500',
         ]);
 
+        $this->authorize('update', $record);
+        
         $record->update($data);
         $request->user()->audit_logs()->create([
             'event_type'    => 'update_label',

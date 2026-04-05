@@ -37,7 +37,7 @@ class IpRecordPolicy
      */
     public function update(User $user, IpRecord $ipRecord): bool
     {
-        return false;
+        return $user->role === 'superadmin' || $user->id === $ipRecord->user_id;
     }
 
     /**
